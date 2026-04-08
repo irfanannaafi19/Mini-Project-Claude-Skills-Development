@@ -1,0 +1,159 @@
+---
+name: deep-research
+description: Melakukan penelitian mendalam di internet untuk menemukan informasi yang valid, komprehensif, dan dapat diverifikasi tentang topik apapun. Gunakan keterampilan ini SETIAP KALI pengguna mengetik perintah \research diikuti dengan topik apapun. Keterampilan ini wajib dipicu oleh perintah \research, bahkan jika topiknya tampak sederhana. Output berupa ringkasan berbahasa Indonesia dengan sitasi IEEE Style dan daftar pustaka, disimpan sebagai file .md.
+---
+ 
+# Deep Research Skill
+ 
+Keterampilan ini melakukan penelitian internet yang mendalam dan komprehensif berdasarkan topik yang diberikan pengguna, lalu menghasilkan laporan terstruktur dalam Bahasa Indonesia dengan sitasi IEEE Style.
+ 
+---
+ 
+## Pemicu
+ 
+Keterampilan ini aktif **hanya** ketika pengguna mengetik:
+```
+\research <topik>
+```
+ 
+Contoh:
+- `\research perubahan iklim dan dampaknya`
+- `\research perkembangan kecerdasan buatan 2024`
+- `\research vaksin mRNA cara kerja`
+ 
+---
+ 
+## Alur Kerja
+ 
+### Langkah 1: Ekstrak Topik
+Baca perintah pengguna dan identifikasi topik yang ingin diteliti. Jika topik ambigu, pecah menjadi sub-topik yang lebih spesifik untuk ditelusuri secara terpisah.
+ 
+### Langkah 2: Lakukan Pencarian Mendalam
+Gunakan `web_search` secara berulang dengan berbagai sudut pandang dan kata kunci yang berbeda. Target minimum: **10 sumber yang valid dan beragam**.
+ 
+Strategi pencarian:
+- Mulai dengan pencarian umum untuk gambaran besar
+- Lanjut dengan pencarian spesifik per sub-topik
+- Cari sumber primer: jurnal ilmiah, laporan resmi, situs institusi
+- Cari sudut pandang berbeda (pro/kontra, berbagai perspektif)
+- Gunakan `web_fetch` untuk membaca isi halaman secara penuh bila diperlukan
+- Variasikan kata kunci: gunakan Bahasa Indonesia DAN Bahasa Inggris untuk hasil lebih luas
+ 
+Contoh variasi pencarian untuk satu topik:
+```
+web_search("perubahan iklim dampak Indonesia 2024")
+web_search("climate change effects Indonesia latest research")
+web_search("IPCC report 2024 Southeast Asia")
+web_search("banjir rob kenaikan permukaan laut Indonesia")
+```
+ 
+### Langkah 3: Verifikasi & Seleksi Sumber
+Untuk setiap sumber yang ditemukan, nilai:
+- **Kredibilitas**: apakah dari institusi terpercaya, jurnal ilmiah, pemerintah, atau media bereputasi?
+- **Relevansi**: apakah informasinya langsung berkaitan dengan topik?
+- **Aktualitas**: utamakan sumber terbaru (khususnya untuk topik yang berkembang)
+- **Dapat diverifikasi**: apakah URL-nya dapat diakses dan nyata?
+ 
+Buang sumber yang tidak dapat diverifikasi atau berasal dari situs yang tidak jelas.
+ 
+### Langkah 4: Susun Laporan
+ 
+Tulis laporan dalam **Bahasa Indonesia** dengan struktur berikut:
+ 
+```markdown
+# Laporan Deep Research: [Topik]
+ 
+**Tanggal Penelitian:** [Tanggal hari ini]
+**Jumlah Sumber:** [N sumber]
+ 
+---
+ 
+## Ringkasan Eksekutif
+[2–3 paragraf yang merangkum temuan utama secara padat]
+ 
+---
+ 
+## Temuan Utama
+ 
+### [Sub-topik 1]
+[Penjelasan mendalam dengan sitasi inline IEEE Style, contoh: [1], [2]]
+ 
+### [Sub-topik 2]
+[Penjelasan mendalam dengan sitasi inline]
+ 
+### [Sub-topik N]
+[dst...]
+ 
+---
+ 
+## Analisis & Konteks
+[Sintesis dari berbagai sumber: apa yang disepakati, apa yang masih diperdebatkan, apa implikasinya]
+ 
+---
+ 
+## Keterbatasan Penelitian
+[Informasi yang tidak ditemukan, area yang masih belum jelas, bias potensial dari sumber yang tersedia]
+ 
+---
+ 
+## Daftar Pustaka (IEEE Style)
+ 
+[1] Nama Penulis, "Judul Artikel," *Nama Jurnal/Website*, vol. X, no. X, pp. X–X, Tahun. [Online]. Available: URL. [Accessed: Tanggal]
+ 
+[2] dst...
+```
+ 
+### Langkah 5: Format Sitasi IEEE
+ 
+**Sitasi inline**: gunakan angka dalam kurung kotak, contoh: `[1]`, `[3], [4]`
+ 
+**Format Daftar Pustaka IEEE** berdasarkan jenis sumber:
+ 
+**Jurnal ilmiah:**
+```
+[N] A. Nama and B. Nama, "Judul artikel," *Nama Jurnal*, vol. X, no. X, pp. X–X, Tahun.
+```
+ 
+**Artikel web/berita:**
+```
+[N] Nama Penulis, "Judul Artikel," Nama Website, Tanggal Terbit. [Online]. Available: https://url-lengkap. [Accessed: Tgl Bulan Tahun]
+```
+ 
+**Laporan lembaga/pemerintah:**
+```
+[N] Nama Lembaga, "Judul Laporan," Kota: Penerbit, Tahun. [Online]. Available: URL
+```
+ 
+**Buku:**
+```
+[N] A. Nama, *Judul Buku*, Edisi ke-X. Kota: Penerbit, Tahun.
+```
+ 
+### Langkah 6: Simpan sebagai File .md
+ 
+Simpan laporan ke `/mnt/user-data/outputs/research_[topik-singkat]_[tanggal].md`
+ 
+Nama file: gunakan huruf kecil, ganti spasi dengan underscore, tambahkan tanggal format YYYYMMDD.
+ 
+Contoh: `research_perubahan_iklim_20250408.md`
+ 
+Setelah menyimpan, gunakan `present_files` untuk menyerahkan file ke pengguna.
+ 
+---
+ 
+## Standar Kualitas
+ 
+- **Minimum 10 sumber** yang valid dan dapat diverifikasi
+- **Tidak ada informasi tanpa sitasi** — setiap klaim faktual harus ada referensinya
+- **Semua URL harus nyata** — jangan mengarang atau menebak URL
+- **Bahasa Indonesia baku** — gunakan ejaan yang benar dan kalimat yang jelas
+- **Seimbang** — sertakan perspektif yang berbeda jika topik memiliki berbagai sudut pandang
+- **Transparan** — akui jika ada informasi yang tidak ditemukan
+ 
+---
+ 
+## Catatan Penting
+ 
+- Jangan mengarang fakta atau URL. Jika informasi tidak ditemukan, nyatakan dengan jelas di bagian "Keterbatasan Penelitian".
+- Jika topik sangat luas, fokuskan pada aspek paling relevan dan sebutkan aspek lain yang tidak dicakup.
+- Jika sumber berbahasa Inggris, terjemahkan/parafrasekan informasinya ke Bahasa Indonesia dalam laporan.
