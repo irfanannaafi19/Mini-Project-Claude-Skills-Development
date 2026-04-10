@@ -1,7 +1,5 @@
 # Mini-Project-Claude-Skills-Development
 
-# Mini-Project-Claude-Skills-Development
-
 Repositori ini berisi kumpulan **Claude Skills** yang dikembangkan secara mandiri — instruksi terstruktur yang memungkinkan Claude AI melakukan tugas-tugas spesifik dengan lebih akurat, konsisten, dan terarah.
 
 ---
