@@ -1,0 +1,94 @@
+---
+name: create-md
+description: Membuat file markdown (.md) dari percakapan atau file yang dikirimkan. Gunakan skill ini ketika pengguna menjalankan command /create-md untuk mengkonversi hasil percakapan atau file yang dikirimkan (mendukung .txt, .pdf, .docx, .md, dan format teks lainnya) menjadi file markdown yang terstruktur. File akan dinamai otomatis dengan format YYYY.MM.DD.NNN (contoh: 2026.06.09.001) dan berisi metadata lengkap serta konten yang dipreservasi tanpa perubahan. Trigger ini untuk ringkasan project harian, jurnal harian, atau dokumentasi hasil percakapan.
+---
+
+# Create Markdown Skill
+
+Skill ini memungkinkan Anda untuk mengubah hasil percakapan atau file yang dikirimkan menjadi file markdown terstruktur dengan metadata otomatis.
+
+## Cara Penggunaan
+
+Pengguna dapat menjalankan skill ini dengan perintah:
+```
+/create-md
+```
+
+### Dua Skenario Penggunaan:
+
+#### Skenario 1: Dari Percakapan Saat Ini
+Jika pengguna menjalankan `/create-md` dalam percakapan, ambil bagian-bagian **penting** (output, hasil, rekomendasi) dari percakapan tersebut. Jangan masukkan semua pesan user-Claude, hanya hasil/output yang relevan.
+
+#### Skenario 2: Dari File yang Dikirimkan
+Jika pengguna telah mengirimkan file (upload), baca file tersebut dan konversi isinya ke format markdown. Format yang didukung:
+- `.txt` (file teks biasa)
+- `.pdf` (ekstrak teks dari PDF)
+- `.docx` (ekstrak dari Word document)
+- `.md` (baca dan format ulang jika perlu)
+- Format teks lainnya
+
+## Output Format
+
+### Penamaan File
+Nama file otomatis dibuat dengan format:
+```
+YYYY.MM.DD.NNN.md
+```
+Contoh: `2026.06.09.001.md`, `2026.06.09.002.md`
+
+**Logika penomoran:**
+- Ambil tanggal hari ini dalam format YYYY.MM.DD
+- Jika sudah ada file dengan tanggal tersebut, increment nomor urut (001, 002, 003, dst)
+- Jika belum ada file hari ini, mulai dari 001
+
+### Struktur Konten
+
+```markdown
+# Metadata
+
+- **Tanggal**: [Tanggal otomatis dari sistem]
+- **Waktu**: [Waktu pembuatan]
+- **Sumber**: [Dari Percakapan / Dari File: nama-file]
+- **Judul**: [Input dari pengguna]
+
+# Konten Utama
+
+[Isi konten tanpa perubahan]
+```
+
+**Catatan Penting:**
+- Metadata menggunakan markdown headers (`#` untuk judul utama)
+- Jangan mengubah atau memodifikasi isi konten
+- Simpan semua informasi sesuai aslinya
+- Format konten sesuai dengan struktur markdown yang baik
+
+## Proses Langkah demi Langkah
+
+1. **Identifikasi sumber**: Apakah dari percakapan atau file upload?
+2. **Ekstrak konten**: 
+   - Dari percakapan: ambil bagian penting saja
+   - Dari file: baca dan ekstrak teks
+3. **Tanya judul**: Minta pengguna untuk input judul (jika belum disediakan)
+4. **Generate nama file**: Otomatis dengan format YYYY.MM.DD.NNN
+5. **Format metadata**: Tambahkan header metadata dengan info tanggal, waktu, sumber, judul
+6. **Gabungkan**: Metadata + konten utama
+7. **Simpan & presentasi**: Simpan ke `/mnt/user-data/outputs/` dan tampilkan ke pengguna
+
+## Tips Implementasi
+
+- **Untuk PDF**: Gunakan tool yang sesuai untuk ekstrak teks dari PDF
+- **Untuk DOCX**: Gunakan tool yang sesuai untuk ekstrak konten dari Word
+- **Untuk TXT**: Baca langsung
+- **Untuk MD**: Format ulang jika perlu, tapi jangan ubah konten
+- **Penomoran file**: Cek file yang sudah ada di direktori output sebelum memberi nama
+
+## Output yang Diharapkan
+
+Pengguna akan menerima:
+1. File `.md` yang siap diunduh
+2. Preview konten di chat
+3. Informasi nama file dan lokasi penyimpanan
+
+---
+
+**Catatan**: Skill ini dirancang untuk keperluan dokumentasi harian, jurnal, atau ringkasan project tanpa modifikasi konten asli.
